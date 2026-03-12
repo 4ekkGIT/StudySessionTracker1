@@ -37,16 +37,21 @@ public class SessionManager {
         if (currentSession != null) {
             System.out.println("There is an active session already!");
             return;
-        };
-        System.out.print("Enter subject: ");
+        }
+        System.out.println("Enter '0' to cancel");
+        System.out.print("Enter a subject name: ");
         scanner.nextLine();
         String subject = scanner.nextLine();
-        Session session = new Session();
-        session.subject = subject;
-        session.startTime = LocalDateTime.now();
-        currentSession = session;
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
-        System.out.println("Session started at " + session.startTime.format(formatter));
+        if (subject.equals("0")){
+            System.out.println("Canceling...");
+            return;
+        } else {Session session = new Session();
+            session.subject = subject;
+            session.startTime = LocalDateTime.now();
+            currentSession = session;
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+            System.out.println("Session started at " + session.startTime.format(formatter));
+        }
     }
 
     public void stopSession() {
